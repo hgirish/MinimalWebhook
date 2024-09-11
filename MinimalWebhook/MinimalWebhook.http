@@ -1,6 +1,11 @@
 @MinimalWebhook_HostAddress = http://localhost:5115
 
-GET {{MinimalWebhook_HostAddress}}/weatherforecast/
+POST {{MinimalWebhook_HostAddress}}/webhook/
 Accept: application/json
 
+{
+    "Phone": "1234567890",
+    "Name": "Webex User",
+    "Appt" : "10/4/2024 11:00:00 AM"
+}
 ###

@@ -1,8 +1,4 @@
-﻿
-// Add services to the container.
-
-
-
+﻿namespace MinimalWebhook;
 
 public class Appointment
 {

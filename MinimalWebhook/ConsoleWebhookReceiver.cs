@@ -1,6 +1,8 @@
 ﻿using MinimalWebhook;
 using System.Text.Json;
 
+namespace MinimalWebhook;
+
 public class ConsoleWebhookReceiver : IReceiveWebhook
 {
     private readonly IDataService _dataService;
