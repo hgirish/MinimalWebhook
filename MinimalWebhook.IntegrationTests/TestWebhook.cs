@@ -53,4 +53,9 @@ public class FakeWebhookReceiver : IReceiveWebhook
         Receipts.Add(requestBody);
         return "Hello back";
     }
+
+    string IReceiveWebhook.ProcessRequest(string requestBody)
+    {
+        throw new NotImplementedException();
+    }
 }

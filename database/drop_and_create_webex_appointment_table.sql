@@ -1,11 +1,9 @@
 USE [WebexAppointment]
 GO
 
-ALTER TABLE [dbo].[Appointment] DROP CONSTRAINT  if exists [DF_Appointment_Created]
-GO
-
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Appointment]') AND type in (N'U'))
+ALTER TABLE [dbo].[Appointment] DROP CONSTRAINT  if exists [DF_Appointment_Created]
 DROP TABLE [dbo].[Appointment]
 GO
 

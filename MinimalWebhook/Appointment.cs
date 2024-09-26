@@ -5,6 +5,7 @@ public class Appointment
     public string? Phone { get; set; }
     public string? Name { get; set; }
     public string? Appt { get; set; }
+    public string? Status { get; set; }
     public DateTime? GetAppointment()
     {
         DateTime.TryParse(Appt, out DateTime date);

@@ -1,10 +1,4 @@
-﻿
-// Add services to the container.
-
-
-
-
-public interface IReceiveWebhook
+﻿public interface IReceiveWebhook
 {
-    Task<string> ProcessRequest(string requestBody);
+    string ProcessRequest(string requestBody);
 }
