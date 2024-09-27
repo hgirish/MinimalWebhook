@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using MinimalWebhook;
-using MinimalWebhook.Models;
+using Microsoft.AspNetCore.OpenApi;
+using MinimalWebhook.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,17 @@ builder.Services.AddSingleton<IDataService, DataService>();
 builder.Services.AddSingleton<IReceiveWebhook, ConsoleWebhookReceiver>();
 builder.Services.AddSingleton<IReceiveWhatsAppNotification, ReceiveWhatsAppNotification>();
 
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+};
 
 app.UseHttpsRedirection();
 app.MapGet("/", () =>
@@ -30,6 +41,8 @@ app.MapPost("/WhatsAppNotification", async (HttpContext context, IReceiveWhatsAp
 
    
 });
+
+app.MapPersonEndpoints();
 
 app.Run();
 public partial class Program { }

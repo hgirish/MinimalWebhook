@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using MinimalWebhook.Models;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace MinimalWebhook;
 
@@ -57,5 +58,23 @@ public class DataService : IDataService
         var rowsAffected = connection.Execute(sql, notificationData);
 
         return rowsAffected > 0;
+    }
+
+    public List<Person> GetPersonByPhone(string phone)
+    {
+        phone = NumbersOnly(phone);
+        using var connection = new SqlConnection(connString);
+        var persons = connection.Query<Person>("Select * from Persons").ToList();
+        var person = persons.Where(p => !string.IsNullOrEmpty(p.MobileNumber) &&  NumbersOnly(p.MobileNumber) == phone);
+        return person.ToList();
+    }
+    public string NumbersOnly(string phone) {
+        if (string.IsNullOrEmpty(phone))
+        {
+            return "";
+        }
+        phone = phone.Trim();
+        phone = Regex.Replace(phone, "[^0-9]", "");
+        return phone;
     }
 }
