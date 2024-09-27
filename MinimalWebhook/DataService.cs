@@ -77,4 +77,14 @@ public class DataService : IDataService
         phone = Regex.Replace(phone, "[^0-9]", "");
         return phone;
     }
+
+    public void PatchPerson(int id, Person model)
+    {
+        using var connection = new SqlConnection(connString);
+        var sql = "Update Persons set VideoCallScheduled = @VideoCallScheduled, ModifiedAt = @ModifiedAt where Id = @Id";
+        var data = new { Id = id, VideoCallScheduled = model.videoCallScheduled, ModifiedAt = DateTime.UtcNow };
+        connection.Execute(sql, data);
+        return;
+
+    }
 }

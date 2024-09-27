@@ -15,7 +15,7 @@ public static class PersonEndpoints
         .WithName("GetAllPeople")
         .WithOpenApi();
 
-        group.MapGet("/{phone}", (string phone, IDataService dataService) =>
+        group.MapGet("/byphone", (string phone, IDataService dataService) =>
         {
             return dataService.GetPersonByPhone(phone);
 
@@ -42,6 +42,13 @@ public static class PersonEndpoints
             //return TypedResults.Ok(new Person { ID = id });
         })
         .WithName("DeletePerson")
+        .WithOpenApi();
+        group.MapPatch("/{id}", (int id, Person model, IDataService dataService) =>
+        {
+            dataService.PatchPerson(id, model);
+            return TypedResults.NoContent();
+        })
+        .WithName("PatchPerson")
         .WithOpenApi();
     }
 }
